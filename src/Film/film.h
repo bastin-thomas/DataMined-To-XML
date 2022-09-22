@@ -1,10 +1,17 @@
 #ifndef FILM_H
 #define FILM_H
 
+#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <iostream>
 #include <fstream>
+#include <wchar.h>
+#include <codecvt>
+#include <locale>
+#include <vector>
+
+
 
 using namespace std;
 
@@ -56,6 +63,8 @@ class Film {
     void Save(ofstream& fichier) const;    //Save Objet in Fichier
     void Load(ifstream& fichier);          //Load Objet from Fichier 
     */
+
+    vector<string> getTokens(string line, const wchar_t sep);
 
 };
 
