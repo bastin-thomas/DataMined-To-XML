@@ -14,6 +14,9 @@
 #include <vector>
 #include <ctime>
 
+
+#include "./Genre/genre.hpp"
+
 using namespace std;
 
 class Film {
@@ -34,7 +37,7 @@ class Film {
         
         string tag;
 
-        // vector<Genre> genres; // Genre: id, name
+        vector<Genre> genres;
         // vector<Director> directors; // Director: id, name
         // vector<Actor> actors; //Actor: id, name, character
 
@@ -52,11 +55,6 @@ class Film {
 
     //Deconstructeur
     ~Film();
-
-    //Getters Setters
-    int getId() const;
-
-    void setId(const int idP);
 
     //Affiche un tuple de Film:
     void Affiche();
@@ -80,7 +78,48 @@ class Film {
 
     static vector<string> stoTags(string stags);
 
+    static vector<Genre> stoGs(string sgenre);
+
+
+
+    //Getters/Setters:
+    int getId() const;
+    void setId(const int idP);
+
+    string getTitle() const;
+    void setTitle(const string s);
+
+    string getOriginalTitle() const;
+    void setOriginalTitle(const string s);
+
+    tm getRealeseDate() const;
+    void setRealeseDate(const tm d);
+    
+    string getStatus() const;
+    void setStatus(const string s);
+
+    double getVoteAverage() const;
+    void setVoteAverage(const double d);
+    
+    int getVoteCount() const;
+    void setVoteCount(const int v);
+
+    int getRunTime() const;
+    void setRunTime(const int run);
+    
+    string getCertification() const;
+    void setCertification(const string c);
+    
+    string getPosterPath() const;
+    void setPosterPath(const string ppath);
+    
+    double getBudget() const;
+    void setBudget(const double b);
+
+    string getTag() const;
+    void setTag(const string s);
+        
+    vector<Genre> getGenres() const;
+    void setGenres(const vector<Genre> v);
 };
-
-
 #endif

@@ -15,10 +15,9 @@ class Genre{
         string label;
 
     public:
-        Genre(int ident, string lab){
-            id = ident;
-            label = lab;
-        }
+        Genre(int ident, string lab);
+
+        Genre(const Genre& e);
 
         int getId() const;
         void setId(int indent);
@@ -26,9 +25,8 @@ class Genre{
         string getLabel() const;
         void setLabel(const string& s);
 
-
         //=
-        Genre& operator=(const Genre& t2);
+        Genre& operator=(const Genre& e);
 
         //<<
         friend std::ostream& operator<<(std::ostream& s, const Genre& t1);

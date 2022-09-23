@@ -18,11 +18,29 @@ int main(){
     fileName = "../File/";
     fileName += "1000movies.txt";
 
-    csv.open(fileName);
+    try{
+        csv.open(fileName);
+    }
+    catch(const ifstream::failure& e){
+        cout << "Error, not be able to open/read the file";
+    }
+    
 
     while(getline(csv, line)){
         Film tmp;
-        tmp = Film(line);
+        try{
+            tmp = Film(line);
+        }
+        catch(char const* e)
+        {
+            cout << e << endl;
+        }
+        catch(...)
+        {
+            cout << "Not Implemented Exception"<<endl;
+        }
+        
+        tmp.Affiche();
     }
     return 0;
 }
