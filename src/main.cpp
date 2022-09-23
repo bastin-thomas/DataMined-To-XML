@@ -9,7 +9,10 @@
 
 using namespace std;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 09137a01d736121c82fa6b30fd3a55634a993c1f
 int main(){
     string fileName;
     string line;
@@ -22,6 +25,10 @@ int main(){
     csv.open(fileName);
 
     while(getline(csv, line)){
+<<<<<<< HEAD
+        Film tmp;
+        tmp = Film(line);
+=======
         Film tmp = Film(line);
 
         //Creation des premiers Tokens, récupérer en vecteur
@@ -33,7 +40,7 @@ int main(){
         }       
 
         cout << endl;
+>>>>>>> 09137a01d736121c82fa6b30fd3a55634a993c1f
     }
-
     return 0;
 }
