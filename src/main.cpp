@@ -13,9 +13,6 @@
 
 using namespace std;
 
-vector<string> getTokens(string line);
-
-
 int main(){
     string fileName;
     string line;
@@ -29,35 +26,7 @@ int main(){
 
     while(getline(csv, line)){
         Film tmp;
-
-        //Creation des premiers Tokens, récupérer en vecteur
-        tokens = getTokens(line);
-
-        //Lecture des premiers Tokens, pour les distribués en Type Film
-        for(int i = 0; i < tokens.size() ; i++){
-            cout << tokens[i] << ",  ";
-        }
-
-                
-
-        cout << endl;
+        tmp = Film(line);
     }
-
     return 0;
-}
-
-vector<string> getTokens(string line){
-    vector<string> tokens;
-    wstring temp;
-
-    //Convert string to wstring
-    wstringstream wss(wstring_convert<codecvt_utf8<wchar_t>>().from_bytes(line));
-
-    while(getline(wss, temp, L'‣')){
-        //1rst convert wstring to string
-        //2nd add to the tokens list
-        tokens.push_back(wstring_convert<codecvt_utf8<wchar_t>>().to_bytes(temp));
-    }
-
-    return tokens;
 }
