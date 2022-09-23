@@ -11,7 +11,7 @@
     }
     
     Film::Film(string line){
-
+        vector<string> tokenizedString = getTokens(line, L"+");
     }
 
     //Constructeur de copievoid setIdGroupes(const Liste<int> &idG);
@@ -67,14 +67,14 @@
     }
 
 
-    vector<string> Film::getTokens(string line, const wchar_t sep){
+    vector<string> Film::getTokens(string line, const wchar_t * sep){
         vector<string> tokens;
         wstring temp;
 
         //Convert string to wstring
         wstringstream wss(wstring_convert<codecvt_utf8<wchar_t>>().from_bytes(line));
 
-        while(getline(wss, temp, sep)){
+        while(getline(wss, temp, *sep)){
             //1rst convert wstring to string
             //2nd add to the tokens list
             tokens.push_back(wstring_convert<codecvt_utf8<wchar_t>>().to_bytes(temp));
