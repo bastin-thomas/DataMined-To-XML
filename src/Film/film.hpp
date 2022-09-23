@@ -1,12 +1,13 @@
 #ifndef FILM_H
 #define FILM_H
 
-#include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
 #include <iostream>
 #include <fstream>
+
+#include <sstream>
 #include <wchar.h>
 #include <codecvt>
 #include <locale>
@@ -32,7 +33,7 @@ class Film {
         double budget;
         
         string tag;
-        
+
         // vector<Genre> genres; // Genre: id, name
         // vector<Director> directors; // Director: id, name
         // vector<Actor> actors; //Actor: id, name, character
@@ -63,15 +64,6 @@ class Film {
     //OPPERATOR SURCHARGE
     //=
     Film& operator=(const Film& t2);
-
-    //== 
-    friend bool operator==(const Film& t1, const Film& t2);
-
-    //< 
-    friend bool operator<(const Film& t1, const Film& t2);
-
-    //>
-    friend bool operator>(const Film& t1, const Film& t2);
 
     //<<
     friend std::ostream& operator<<(std::ostream& s, const Film& t1);
