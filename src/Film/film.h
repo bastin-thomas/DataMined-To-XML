@@ -1,16 +1,40 @@
 #ifndef FILM_H
 #define FILM_H
 
+#include <sstream>
+#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <iostream>
 #include <fstream>
+#include <wchar.h>
+#include <codecvt>
+#include <locale>
+#include <vector>
+#include <ctime>
 
 using namespace std;
 
 class Film {
     private:
         int id;
+        string title;
+        string originalTitle;
+        time_t releaseDate;
+        
+        int status;
+        float voteAverage;
+        int voteCount;
+        //RunTime;
+        //Certification;
+        
+        string posterPath;
+        float budget;
+        
+        vector<string> tags;
+        // vector<Genre> genres; // Genre: id, name
+        // vector<Director> directors; // Director: id, name
+        // vector<Actor> actors; //Actor: id, name, character
 
     public:
     //Constructeur par Default
@@ -56,6 +80,8 @@ class Film {
     void Save(ofstream& fichier) const;    //Save Objet in Fichier
     void Load(ifstream& fichier);          //Load Objet from Fichier 
     */
+
+    static vector<string> getTokens(string line, const wchar_t * sep);
 
 };
 
