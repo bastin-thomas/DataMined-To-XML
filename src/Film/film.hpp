@@ -20,18 +20,19 @@ class Film {
         int id;
         string title;
         string originalTitle;
-        time_t releaseDate;
+        tm releaseDate;
         
-        int status;
-        float voteAverage;
+        string status;
+        double voteAverage;
         int voteCount;
-        //RunTime;
-        //Certification;
+        int runTime;
+        string certification;
         
         string posterPath;
-        float budget;
+        double budget;
         
-        vector<string> tags;
+        string tag;
+        
         // vector<Genre> genres; // Genre: id, name
         // vector<Director> directors; // Director: id, name
         // vector<Actor> actors; //Actor: id, name, character
@@ -82,6 +83,10 @@ class Film {
     */
 
     static vector<string> getTokens(string line, const wchar_t * sep);
+
+    static tm stodate(string sdate);
+
+    static vector<string> stoTags(string stags);
 
 };
 

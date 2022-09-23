@@ -1,17 +1,39 @@
-    #include "film.h"
+    #include "film.hpp"
    
     //Constructeur par Default
     Film::Film(){
-
+        id = -30;
     }
 
-    //Constructeur d'init
-    Film::Film(int id){
-
-    }
-    
+    //Constructeur d'init    
     Film::Film(string line){
         vector<string> tokenizedString = getTokens(line, L"+");
+
+        try{ id = stoi(tokenizedString[0]); }
+        catch(exception &err){ throw "Error: id not an Int"; }
+
+        title = tokenizedString[1];
+        originalTitle = tokenizedString[2];
+        releaseDate = stodate(tokenizedString[3]);
+        status = tokenizedString[4];
+
+        try{ voteAverage = stod(tokenizedString[5]); } 
+        catch(exception &err){ throw "Error: voteAverage not a Double."; }
+        
+        try{ voteCount = stoi(tokenizedString[6]); }
+        catch(exception &err){ throw "Error: voteCount not an Int.";}
+
+        try{ runTime = stoi(tokenizedString[7]); }
+        catch(exception &err){ throw "Error: runTime not an Int.";}
+
+        certification = tokenizedString[8];
+        posterPath = tokenizedString[9];
+
+        try{ budget = stod(tokenizedString[10]); } 
+        catch(exception &err){ throw "Error: budget not a Double."; }
+
+        tag = tokenizedString[11];
+
     }
 
     //Constructeur de copievoid setIdGroupes(const Liste<int> &idG);
@@ -67,6 +89,8 @@
     }
 
 
+
+    //Utility Functions
     vector<string> Film::getTokens(string line, const wchar_t * sep){
         vector<string> tokens;
         wstring temp;
@@ -82,6 +106,29 @@
 
         return tokens;
     }
+
+    //Take a String and construct a time_t Date
+    tm Film::stodate(string sdate)
+    {
+        tm Date;
+        vector<string> tokens;
+        tokens = getTokens(sdate, L"-");
+        
+        try{
+            Date.tm_mday = stoi(tokens[2]);
+            Date.tm_mon = stoi(tokens[1]);
+            Date.tm_year = stoi(tokens[0]);
+        }
+        catch(exception &err){
+            throw "Error: DateFormatInvalid";
+        }
+        
+        return Date;
+    }
+
+
+
+
 
     /*
     //Flux Gestion Fichier:
