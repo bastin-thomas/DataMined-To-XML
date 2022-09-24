@@ -35,6 +35,8 @@
         tag = tokenizedString[11];
 
         genres = stoGs(tokenizedString[12]);
+
+        directors = stoDs(tokenizedString[13]);
     }
 
     //Constructeur de copievoid setIdGroupes(const Liste<int> &idG);
@@ -145,22 +147,43 @@
 
 
     vector<Genre> Film::stoGs(string sgenre){
-        bool test = false;
         vector<Genre> genres;
-
         vector<string> tmp;
+
         tmp = getTokens(sgenre, L"‖");
-
         for(int i = 0 ; i < tmp.size() ; i++){
-            vector<string> tmp2;
-            tmp2 = getTokens(tmp[i], L"․");
-
-            try{ genres.push_back( Genre(stoi(tmp2[0]), tmp2[1])); test = true;} 
-            catch(exception &err){ throw "Genre: Id is not an Int."; test = false;}
+            try{
+                genres.push_back( Genre(tmp[i]) );
+            }
+            catch(const char * t){
+                throw t;
+            }
+            catch(...){
+                throw "Error: Not Implemented Exception.";
+            }
         }
 
-        if(test == false) return genres;
-        else return genres;
+        return genres;
+    }
+
+    vector<Director> Film::stoDs(string sdirector){
+        vector<Director> directors;
+        vector<string> tmp;
+
+        tmp = getTokens(sdirector, L"‖");
+        for(int i=0 ; i<tmp.size() ; i++){
+            try{
+                directors.push_back(Director(tmp[i]));
+            }
+            catch(const char * t){
+                throw t;
+            }
+            catch(...){
+                throw "Error: Not Implemented Exception.";
+            }
+        }
+
+        return directors;
     }
     
     int Film::getId() const
@@ -292,3 +315,15 @@
     {
         genres = v;
     }
+    
+    vector<Director> Film::getDirectors() const
+    {
+        return directors;
+    }
+    
+    void Film::setDirectors(const vector<Director> d)
+    {
+        directors = d;
+    }
+
+

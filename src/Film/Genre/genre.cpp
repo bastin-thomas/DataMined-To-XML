@@ -1,9 +1,23 @@
 #include "genre.hpp"
 
+Genre::Genre(){
+    setId(-1);
+    setLabel("null");
+}
 
 Genre::Genre(int ident, string lab){
     setId(ident);
     setLabel(lab);
+}
+
+Genre::Genre(string s){
+    vector<string> tmp;
+    tmp = Film::getTokens(s, L"․");
+
+    try{ setId(stoi(tmp[0])); }
+    catch(exception &err){ throw "Error: id is not an int"; }
+
+    setLabel(tmp[1]);    
 }
 
 Genre::Genre(const Genre& e){

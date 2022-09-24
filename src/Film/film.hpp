@@ -16,6 +16,7 @@
 
 
 #include "./Genre/genre.hpp"
+#include "./Director/director.hpp"
 
 using namespace std;
 
@@ -38,7 +39,7 @@ class Film {
         string tag;
 
         vector<Genre> genres;
-        // vector<Director> directors; // Director: id, name
+        vector<Director> directors; // Director: id, name
         // vector<Actor> actors; //Actor: id, name, character
 
     public:
@@ -80,6 +81,7 @@ class Film {
 
     static vector<Genre> stoGs(string sgenre);
 
+    static vector<Director> Film::stoDs(string sdirector);
 
 
     //Getters/Setters:
@@ -121,5 +123,8 @@ class Film {
         
     vector<Genre> getGenres() const;
     void setGenres(const vector<Genre> v);
+
+    vector<Director> getDirectors() const;
+    void setDirectors(const vector<Director> d);
 };
 #endif

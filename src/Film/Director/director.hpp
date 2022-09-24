@@ -1,5 +1,5 @@
-#ifndef GENRE_H
-#define GENRE_H
+#ifndef DIRECTOR_H
+#define DIRECTOR_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,19 +14,19 @@
 
 using namespace std;
 
-class Genre{
+class Director{
     protected:
         int id;
         string label;
 
     public:
-        Genre();
+        Director();
 
-        Genre(int ident, string lab);
+        Director(int ident, string lab);
 
-        Genre(string s);
+        Director(string s);
 
-        Genre(const Genre& e);
+        Director(const Director& e);
 
         int getId() const;
         void setId(int indent);
@@ -35,9 +35,9 @@ class Genre{
         void setLabel(const string& s);
 
         //=
-        Genre& operator=(const Genre& e);
+        Director& operator=(const Director& e);
 
         //<<
-        friend std::ostream& operator<<(std::ostream& s, const Genre& t1);
+        friend std::ostream& operator<<(std::ostream& s, const Director& t1);
 };
 #endif
