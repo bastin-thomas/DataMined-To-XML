@@ -7,14 +7,14 @@
 
     //Constructeur d'init    
     Film::Film(string line){
-        vector<string> tokenizedString = getTokens(line, L"‣");
+        vector<string> tokenizedString = UtilityLib::getTokens(line, L"‣");
 
         try{ id = stoi(tokenizedString[0]); }
         catch(exception &err){ throw "Error: id not an Int"; }
 
         title = tokenizedString[1];
         originalTitle = tokenizedString[2];
-        releaseDate = stodate(tokenizedString[3]);
+        releaseDate = UtilityLib::stodate(tokenizedString[3]);
         status = tokenizedString[4];
 
         try{ voteAverage = stod(tokenizedString[5]); } 
@@ -34,9 +34,11 @@
 
         tag = tokenizedString[11];
 
-        genres = stoGs(tokenizedString[12]);
+        genres = Genre::stoGs(tokenizedString[12]);
 
-        directors = stoDs(tokenizedString[13]);
+        directors = Director::stoDs(tokenizedString[13]);
+
+        actors = Actor::stoAs(tokenizedString[14]);
     }
 
     //Constructeur de copievoid setIdGroupes(const Liste<int> &idG);
@@ -72,6 +74,14 @@
             cout << "Genre = " << getGenres()[i] << endl;
         }
 
+        for(int i = 0 ; i<getDirectors().size() ; i++){
+            cout << "Director = " << getDirectors()[i] << endl;
+        }
+
+        for(int i = 0 ; i<getActors().size() ; i++){
+            cout << "Actors = " << getActors()[i] << endl;
+        }
+
         cout << endl << endl;
     }
 
@@ -91,7 +101,8 @@
         setBudget(t2.getBudget());
         setTag(t2.getTag());
         setGenres(t2.getGenres());
-
+        setDirectors(t2.getDirectors());
+        setActors(t2.getActors());
         return *this;
     }
 
@@ -104,87 +115,6 @@
 
 
 
-    //Utility Functions
-    vector<string> Film::getTokens(string line, const wchar_t * sep){
-        vector<string> tokens;
-        wstring temp;
-
-        //Convert string to wstring
-        wstringstream wss(wstring_convert<codecvt_utf8<wchar_t>>().from_bytes(line));
-
-        while(getline(wss, temp, *sep)){
-            //1rst convert wstring to string
-            //2nd add to the tokens list
-            tokens.push_back(wstring_convert<codecvt_utf8<wchar_t>>().to_bytes(temp));
-        }
-
-        return tokens;
-    }
-
-    //Take a String and construct a time_t Date
-    tm Film::stodate(string sdate)
-    {
-        tm Date;
-        vector<string> tokens;
-        tokens = getTokens(sdate, L"-");
-        
-        if(tokens.size() != 0){
-            try{
-                Date.tm_mday = stoi(tokens[2]);
-                Date.tm_mon = stoi(tokens[1]);
-                Date.tm_year = stoi(tokens[0]);
-            }
-            catch(exception &err){
-                throw "Error: DateFormatInvalid";
-            }
-        }
-        else{
-            Date.tm_year = -1;
-        }
-        
-        return Date;
-    }
-
-
-    vector<Genre> Film::stoGs(string sgenre){
-        vector<Genre> genres;
-        vector<string> tmp;
-
-        tmp = getTokens(sgenre, L"‖");
-        for(int i = 0 ; i < tmp.size() ; i++){
-            try{
-                genres.push_back( Genre(tmp[i]) );
-            }
-            catch(const char * t){
-                throw t;
-            }
-            catch(...){
-                throw "Error: Not Implemented Exception.";
-            }
-        }
-
-        return genres;
-    }
-
-    vector<Director> Film::stoDs(string sdirector){
-        vector<Director> directors;
-        vector<string> tmp;
-
-        tmp = getTokens(sdirector, L"‖");
-        for(int i=0 ; i<tmp.size() ; i++){
-            try{
-                directors.push_back(Director(tmp[i]));
-            }
-            catch(const char * t){
-                throw t;
-            }
-            catch(...){
-                throw "Error: Not Implemented Exception.";
-            }
-        }
-
-        return directors;
-    }
     
     int Film::getId() const
     {
@@ -324,6 +254,16 @@
     void Film::setDirectors(const vector<Director> d)
     {
         directors = d;
+    }
+    
+    vector<Actor> Film::getActors() const
+    {
+        return actors;
+    }
+    
+    void Film::setActors(const vector<Actor> a)
+    {
+        actors = a;
     }
 
 

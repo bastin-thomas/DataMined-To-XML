@@ -14,9 +14,10 @@
 #include <vector>
 #include <ctime>
 
-
+#include "../UtilityLib/utilitylib.hpp"
 #include "./Genre/genre.hpp"
 #include "./Director/director.hpp"
+#include "./Actor/actor.hpp"
 
 using namespace std;
 
@@ -39,8 +40,8 @@ class Film {
         string tag;
 
         vector<Genre> genres;
-        vector<Director> directors; // Director: id, name
-        // vector<Actor> actors; //Actor: id, name, character
+        vector<Director> directors;
+        vector<Actor> actors; //Actor: id, name, character
 
     public:
     //Constructeur par Default
@@ -72,16 +73,6 @@ class Film {
     void Save(ofstream& fichier) const;    //Save Objet in Fichier
     void Load(ifstream& fichier);          //Load Objet from Fichier 
     */
-
-    static vector<string> getTokens(string line, const wchar_t * sep);
-
-    static tm stodate(string sdate);
-
-    static vector<string> stoTags(string stags);
-
-    static vector<Genre> stoGs(string sgenre);
-
-    static vector<Director> Film::stoDs(string sdirector);
 
 
     //Getters/Setters:
@@ -126,5 +117,8 @@ class Film {
 
     vector<Director> getDirectors() const;
     void setDirectors(const vector<Director> d);
+
+    vector<Actor> getActors() const;
+    void setActors(const vector<Actor> a);
 };
 #endif

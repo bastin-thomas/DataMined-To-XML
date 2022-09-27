@@ -9,8 +9,8 @@
 
 #include <vector>
 #include <sstream>
+#include "../../UtilityLib/utilitylib.hpp"
 
-#include "../film.hpp"
 
 using namespace std;
 
@@ -39,5 +39,7 @@ class Director{
 
         //<<
         friend std::ostream& operator<<(std::ostream& s, const Director& t1);
+
+        static vector<Director> stoDs(string sdirector);
 };
 #endif

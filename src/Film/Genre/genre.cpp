@@ -12,7 +12,7 @@ Genre::Genre(int ident, string lab){
 
 Genre::Genre(string s){
     vector<string> tmp;
-    tmp = Film::getTokens(s, L"․");
+    tmp = UtilityLib::getTokens(s, L"․");
 
     try{ setId(stoi(tmp[0])); }
     catch(exception &err){ throw "Error: id is not an int"; }
@@ -51,4 +51,31 @@ Genre& Genre::operator=(const Genre& e){
 std::ostream& operator<<(std::ostream& s, const Genre& t1){
     s << "Genre( id=" << t1.getId() << ", label=" << t1.getLabel() << " )";
     return s;
+}
+
+
+
+
+vector<Genre> Genre::stoGs(string sgenre){
+    vector<Genre> genres;
+    vector<string> tmp;
+
+    tmp = UtilityLib::getTokens(sgenre, L"‖");
+
+    if(tmp.size() != 0){
+        for(int i = 0 ; i < tmp.size() ; i++){
+            try{ genres.push_back( Genre(tmp[i])); }
+            catch(const char * t){ throw t; }
+            catch(...){ throw "Error: Not Implemented Exception."; }       
+        }
+    }
+    else{
+        if(sgenre.compare("") != 0){ 
+            try{ genres.push_back( Genre(sgenre) ); }
+            catch(const char * t){ throw t; }
+            catch(...){ throw "Error: Not Implemented Exception."; }    
+        }
+    }
+
+    return genres;
 }

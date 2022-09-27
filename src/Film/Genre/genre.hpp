@@ -10,7 +10,8 @@
 #include <vector>
 #include <sstream>
 
-#include "../film.hpp"
+#include "../../UtilityLib/utilitylib.hpp"
+
 
 using namespace std;
 
@@ -39,5 +40,7 @@ class Genre{
 
         //<<
         friend std::ostream& operator<<(std::ostream& s, const Genre& t1);
+
+        static vector<Genre> stoGs(string sgenre);
 };
 #endif
