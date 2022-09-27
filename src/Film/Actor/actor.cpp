@@ -2,22 +2,49 @@
 
 Actor::Actor(){
     setId(-1);
-    setActName("null");
+    setActName("");
+    setCharName("");
 }
 
 Actor::Actor(int ident, string lab){
     setId(ident);
     setActName(lab);
+    setCharName("");
 }
 
 Actor::Actor(string s){
     vector<string> tmp;
     tmp = UtilityLib::getTokens(s, L"․");
 
-    try{ setId(stoi(tmp[0])); }
-    catch(exception &err){ throw "Error: id is not an int"; }
-    setActName(tmp[1]);    
-    setCharName(tmp[2]);
+    int count = tmp.size();
+
+    if(count == 1){
+        if(tmp[0].size() == 0){
+            setId(-1);
+            setActName("");
+            setCharName("");
+        }
+        else{
+            try{ setId(stoi(tmp[0])); }
+            catch(exception &err){ throw "Error: id is not an int"; }
+            setActName("");
+            setCharName("");
+        }
+    }
+    if(count == 2){
+        try{ setId(stoi(tmp[0])); }
+        catch(exception &err){ throw "Error: id is not an int"; }
+
+        setActName(tmp[1]);
+        setCharName("");
+    }
+    if(count == 3){
+        try{ setId(stoi(tmp[0])); }
+        catch(exception &err){ throw "Error: id is not an int"; }
+
+        setActName(tmp[1]);
+        setCharName(tmp[2]);
+    }
 }
 
 Actor::Actor(const Actor& e){
@@ -58,7 +85,7 @@ Actor& Actor::operator=(const Actor& e){
 
 //<<
 std::ostream& operator<<(std::ostream& s, const Actor& t1){
-    s << "Actor( id=" << t1.getId() << ", Name=" << t1.getActName() <<", CharName=" << t1.getCharName() << " )";
+    s << "<Actor Id=\""<<t1.getId()<<"\" ActName=\""<<t1.getActName()<<"\" CharName=\""<<t1.getCharName()<<"\"/>";
     return s;
 }
 

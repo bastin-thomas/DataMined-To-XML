@@ -1,12 +1,14 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
+#include <algorithm>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
 #include <iostream>
 #include <fstream>
 
+#include <wchar.h>
 #include <vector>
 #include <sstream>
 #include "../../UtilityLib/utilitylib.hpp"

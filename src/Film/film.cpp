@@ -53,36 +53,7 @@
 
     //Affiche un tuple de Film:
     void Film::Affiche(){
-        cout << "ID = " << getId() << endl;
-        cout << "Title = " << getTitle() << endl;
-        cout << "OriginalTitle = " << getOriginalTitle() << endl;
-        
-        if(getRealeseDate().tm_year != -1){
-            cout << "Time = " << getRealeseDate().tm_mday << "/" << getRealeseDate().tm_mon << "/" << getRealeseDate().tm_year <<endl;
-        }
-        
-        cout << "Status = " << getStatus() << endl;
-        cout << "VoteAverage = " << getVoteAverage() << endl;
-        cout << "VoteCount = " << getVoteCount() << endl;
-        cout << "RunTime = " << getRunTime() << endl;
-        cout << "Certification = " << getCertification() << endl;
-        cout << "PosterPath = " << getPosterPath() << endl;
-        cout << "Budget = " << getBudget() << endl;
-        cout << "Tag = " << getTag() << endl;
-
-        for(int i = 0 ; i<getGenres().size() ; i++){
-            cout << "Genre = " << getGenres()[i] << endl;
-        }
-
-        for(int i = 0 ; i<getDirectors().size() ; i++){
-            cout << "Director = " << getDirectors()[i] << endl;
-        }
-
-        for(int i = 0 ; i<getActors().size() ; i++){
-            cout << "Actors = " << getActors()[i] << endl;
-        }
-
-        cout << endl << endl;
+        cout << *this << endl;
     }
 
     //OPPERATOR SURCHARGE
@@ -108,8 +79,59 @@
 
 
     //<<
-    std::ostream& operator<<(std::ostream& s, const Film& t1){
-        s << "";
+    std::ostream& operator<<(std::ostream& s, const Film& e){
+        if(e.getId() == -1){
+            return s;
+        }
+        s << "<Film Id=\"" << e.getId() << "\" PosterPath=\"" << e.getPosterPath() << "\" >" << endl;
+        
+        s << "\t<Title OriginalTitle=\""<<e.getOriginalTitle()<<"\" >" << e.getTitle() << "</Title>"<< endl;
+
+        if(e.getRealeseDate().tm_year != -1){
+            s << "\t<Time Day=\"" << e.getRealeseDate().tm_mday <<"\" Month=\""<< e.getRealeseDate().tm_mon<<"\" Year=\""<< e.getRealeseDate().tm_year <<"\"/>"<<endl;
+        }
+        
+        s << "\t<Status>" << e.getStatus() << "</Status>" << endl;
+        
+        if(e.getVoteCount() != 0 ){
+            s << "\t<Vote Count=\"" << e.getVoteCount() << "\">" << e.getVoteAverage() << "</Vote>" << endl;
+        }
+        else{
+            s << "\t<Vote Count=\"\"></Vote>" << endl;
+        }
+        
+        s << "\t<RunTime>" << e.getRunTime() << "</RunTime>" << endl;
+        
+        s << "\t<Certification>" << e.getCertification() << "</Certification>" << endl;
+        
+        if(e.getBudget()>0.1){
+            s << "\t<Budget>" << e.getBudget() << "</Budget>" << endl;
+        }
+        else{
+            s << "\t<Budget></Budget>" << endl;
+        }
+
+        s << "\t<Tag>" << e.getTag() << "</Tag>" << endl;
+
+        s << "\t<Genres>"<<endl;
+        for(int i = 0 ; i<e.getGenres().size() ; i++){
+            s <<"\t\t"<< e.getGenres()[i] << endl;
+        }
+        s << "\t</Genres>"<<endl;
+
+        s << "\t<Directors>"<<endl;
+        for(int i = 0 ; i<e.getDirectors().size() ; i++){
+            s <<"\t\t"<< e.getDirectors()[i] << endl;
+        }
+        s << "\t</Directors>"<<endl;
+
+        s << "\t<Actors>"<<endl;
+        for(int i = 0 ; i<e.getActors().size() ; i++){
+            s <<"\t\t"<< e.getActors()[i] << endl;
+        }
+        s << "\t</Actors>"<<endl;
+
+        s << "</Film>" << endl;
         return s;
     }
 

@@ -13,11 +13,25 @@ Genre::Genre(int ident, string lab){
 Genre::Genre(string s){
     vector<string> tmp;
     tmp = UtilityLib::getTokens(s, L"․");
+    int count = tmp.size();
 
-    try{ setId(stoi(tmp[0])); }
-    catch(exception &err){ throw "Error: id is not an int"; }
+    if(count == 1){
+        if(tmp[0].size() == 0){
+            setId(-1);
+            setLabel("");
+        }
+        else{
+            try{ setId(stoi(tmp[0])); }
+            catch(exception &err){ throw "Error: id is not an int"; }
+            setLabel("");
+        }
+    }
+    if(count == 2){
+        try{ setId(stoi(tmp[0])); }
+        catch(exception &err){ throw "Error: id is not an int"; }
 
-    setLabel(tmp[1]);    
+        setLabel(tmp[1]);
+    } 
 }
 
 Genre::Genre(const Genre& e){
@@ -49,7 +63,7 @@ Genre& Genre::operator=(const Genre& e){
 
 //<<
 std::ostream& operator<<(std::ostream& s, const Genre& t1){
-    s << "Genre( id=" << t1.getId() << ", label=" << t1.getLabel() << " )";
+    s << "<Genre Id=\""<<t1.getId()<<"\" Label=\""<<t1.getLabel()<<"\"/>";
     return s;
 }
 

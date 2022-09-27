@@ -13,11 +13,25 @@ Director::Director(int ident, string lab){
 Director::Director(string s){
     vector<string> tmp;
     tmp = UtilityLib::getTokens(s, L"․");
+    int count = tmp.size();
 
-    try{ setId(stoi(tmp[0])); }
-    catch(exception &err){ throw "Error: id is not an int"; }
+    if(count == 1){
+        if(tmp[0].size() == 0){
+            setId(-1);
+            setLabel("");
+        }
+        else{
+            try{ setId(stoi(tmp[0])); }
+            catch(exception &err){ throw "Error: id is not an int"; }
+            setLabel("");
+        }
+    }
+    if(count == 2){
+        try{ setId(stoi(tmp[0])); }
+        catch(exception &err){ throw "Error: id is not an int"; }
 
-    setLabel(tmp[1]);    
+        setLabel(tmp[1]);
+    }
 }
 
 Director::Director(const Director& e){
@@ -49,7 +63,7 @@ Director& Director::operator=(const Director& e){
 
 //<<
 std::ostream& operator<<(std::ostream& s, const Director& t1){
-    s << "Director( id=" << t1.getId() << ", Name=" << t1.getLabel() << " )";
+    s << "<Director Id=\""<<t1.getId()<<"\" Name=\""<<t1.getLabel()<<"\"/>";
     return s;
 }
 

@@ -18,6 +18,7 @@
         "xstring": "cpp",
         "iosfwd": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "fstream": "cpp"
     }
 }

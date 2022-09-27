@@ -24,7 +24,6 @@ int main(){
     catch(const ifstream::failure& e){
         cout << "Error, not be able to open/read the file";
     }
-    
 
     while(getline(csv, line)){
         Film tmp;
@@ -40,7 +39,7 @@ int main(){
             cout << "Not Implemented Exception"<<endl;
         }
         
-        tmp.Affiche();
+        cout << tmp << endl; //Insérer le film dans le fichier XML
     }
     return 0;
 }
