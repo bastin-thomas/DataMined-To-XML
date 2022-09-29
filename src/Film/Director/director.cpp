@@ -22,15 +22,17 @@ Director::Director(string s){
         }
         else{
             try{ setId(stoi(tmp[0])); }
-            catch(exception &err){ throw "Error: id is not an int"; }
+            catch(exception &err){ throw "Director.Error: id is not an int"; }
             setLabel("");
         }
     }
     if(count == 2){
         try{ setId(stoi(tmp[0])); }
-        catch(exception &err){ throw "Error: id is not an int"; }
+        catch(exception &err){ throw "Director.Error: id is not an int"; }
 
         setLabel(tmp[1]);
+        UtilityLib::replace_all(label, "&", "&amp;");
+        UtilityLib::replace_all(label, "\"", "&#39;");
     }
 }
 
@@ -82,14 +84,14 @@ vector<Director> Director::stoDs(string sdirector){
             throw t;
         }
         catch(...){
-            throw "Error: Not Implemented Exception.";
+            throw "Director.stoDs.Error: Not Implemented Exception.";
         }
     }
 
     if(tmp.size() == 0 && sdirector.compare("") != 0){
         try{ directors.push_back(Director(sdirector)); }
         catch(const char * t){ throw t; }
-        catch(...){ throw "Error: Not Implemented Exception."; }
+        catch(...){ throw "Director.stoDs.Error: Not Implemented Exception."; }
     }
 
     return directors;

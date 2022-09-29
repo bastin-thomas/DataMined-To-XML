@@ -26,5 +26,7 @@ class UtilityLib{
         static tm stodate(string sdate);
 
         static vector<string> stoTags(string stags);
+
+        static void replace_all( std::string& s, std::string const& toReplace, std::string const& replaceWith);
 };
 #endif // !UTILITYLIB_HPP

@@ -42,3 +42,20 @@
         
         return Date;
     }
+
+
+
+void UtilityLib::replace_all( string& s, string const& toReplace, string const& replaceWith) 
+{
+    bool hasmodified = false;
+
+    if (toReplace.empty()) {
+        return;
+    }
+
+    for (size_t pos = 0; (pos = s.find(toReplace, pos)) != string::npos;) {
+        s.replace(pos, toReplace.length(), replaceWith);
+        pos += replaceWith.length();
+        hasmodified = true;
+    }
+}

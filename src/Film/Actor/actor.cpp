@@ -9,6 +9,7 @@ Actor::Actor(){
 Actor::Actor(int ident, string lab){
     setId(ident);
     setActName(lab);
+    UtilityLib::replace_all(actname, "\"", "\'");
     setCharName("");
 }
 
@@ -26,24 +27,33 @@ Actor::Actor(string s){
         }
         else{
             try{ setId(stoi(tmp[0])); }
-            catch(exception &err){ throw "Error: id is not an int"; }
+            catch(exception &err){ throw "Actor.Error: id is not an int"; }
             setActName("");
             setCharName("");
+            return;
         }
     }
     if(count == 2){
         try{ setId(stoi(tmp[0])); }
-        catch(exception &err){ throw "Error: id is not an int"; }
+        catch(exception &err){ throw "Actor.Error: id is not an int"; }
 
         setActName(tmp[1]);
+        UtilityLib::replace_all(actname, "&", "&amp;");
+        UtilityLib::replace_all(actname, "\"", "&#39;");
         setCharName("");
+        return;
     }
     if(count == 3){
         try{ setId(stoi(tmp[0])); }
-        catch(exception &err){ throw "Error: id is not an int"; }
+        catch(exception &err){ throw "Actor.Error: id is not an int"; }
 
         setActName(tmp[1]);
+        UtilityLib::replace_all(actname, "&", "&amp;");
+        UtilityLib::replace_all(actname, "\"", "&#39;");
         setCharName(tmp[2]);
+        UtilityLib::replace_all(charname, "&", "&amp;");
+        UtilityLib::replace_all(charname, "\"", "&#39;");
+        return;
     }
 }
 
@@ -95,7 +105,6 @@ vector<Actor> Actor::stoAs(string sActor){
     vector<string> tmp;
 
     tmp = UtilityLib::getTokens(sActor, L"‖");
-
     for(int i=0 ; i<tmp.size() ; i++){
         try{
             Actors.push_back(Actor(tmp[i]));
@@ -104,14 +113,8 @@ vector<Actor> Actor::stoAs(string sActor){
             throw t;
         }
         catch(...){
-            throw "Error: Not Implemented Exception.";
+            throw "Actor.stoAs.Error: Not Implemented Exception.";
         }
-    }
-
-    if(tmp.size() == 0 && sActor.compare("") != 0){
-        try{ Actors.push_back(Actor(sActor)); }
-        catch(const char * t){ throw t; }
-        catch(...){ throw "Error: Not Implemented Exception."; }
     }
 
     return Actors;

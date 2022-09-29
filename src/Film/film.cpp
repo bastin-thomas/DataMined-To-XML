@@ -9,36 +9,60 @@
     Film::Film(string line){
         vector<string> tokenizedString = UtilityLib::getTokens(line, L"‣");
 
-        try{ id = stoi(tokenizedString[0]); }
-        catch(exception &err){ throw "Error: id not an Int"; }
+        int t = tokenizedString.size();
 
+        try{ id = stoi(tokenizedString[0]); }
+        catch(exception &err){ throw "FilmInit.Error: id not an Int"; }
+
+        
         title = tokenizedString[1];
+        UtilityLib::replace_all(title, "&", "&amp;");
+
         originalTitle = tokenizedString[2];
+        UtilityLib::replace_all(originalTitle, "&", "&amp;");
+
         releaseDate = UtilityLib::stodate(tokenizedString[3]);
         status = tokenizedString[4];
+        UtilityLib::replace_all(status, "&", "&amp;");
+
+        
 
         try{ voteAverage = stod(tokenizedString[5]); } 
-        catch(exception &err){ throw "Error: voteAverage not a Double."; }
+        catch(exception &err){ throw "FilmInit.Error: voteAverage not a Double."; }
         
         try{ voteCount = stoi(tokenizedString[6]); }
-        catch(exception &err){ throw "Error: voteCount not an Int.";}
+        catch(exception &err){ throw "FilmInit.Error: voteCount not an Int.";}
 
         try{ runTime = stoi(tokenizedString[7]); }
-        catch(exception &err){ throw "Error: runTime not an Int.";}
+        catch(exception &err){ 
+            this->runTime = -1;
+        }
+
 
         certification = tokenizedString[8];
+        UtilityLib::replace_all(certification, "&", "&amp;");
+        
         posterPath = tokenizedString[9];
 
         try{ budget = stod(tokenizedString[10]); } 
-        catch(exception &err){ throw "Error: budget not a Double."; }
+        catch(exception &err){ throw "FilmInit.budget not a Double."; }
 
         tag = tokenizedString[11];
+        UtilityLib::replace_all(tag, "&", "&amp;");
 
-        genres = Genre::stoGs(tokenizedString[12]);
-
-        directors = Director::stoDs(tokenizedString[13]);
-
-        actors = Actor::stoAs(tokenizedString[14]);
+        if(tokenizedString[12].compare("") != 0){
+            genres = Genre::stoGs(tokenizedString[12]);
+        }
+        
+        if(tokenizedString[13].compare("") != 0){
+            directors = Director::stoDs(tokenizedString[13]);
+        }
+        
+        if(tokenizedString[14].compare("") != 0){
+            if(t == 15){
+                actors = Actor::stoAs(tokenizedString[14]);
+            }
+        }
     }
 
     //Constructeur de copievoid setIdGroupes(const Liste<int> &idG);
@@ -83,55 +107,60 @@
         if(e.getId() == -1){
             return s;
         }
-        s << "<Film Id=\"" << e.getId() << "\" PosterPath=\"" << e.getPosterPath() << "\" >" << endl;
+        s << "\t<Film Id=\"" << e.getId() << "\" PosterPath=\"" << e.getPosterPath() << "\" >" << endl;
         
-        s << "\t<Title OriginalTitle=\""<<e.getOriginalTitle()<<"\" >" << e.getTitle() << "</Title>"<< endl;
+        s << "\t\t<Title OriginalTitle=\""<<e.getOriginalTitle()<<"\" >" << e.getTitle() << "</Title>"<< endl;
 
         if(e.getRealeseDate().tm_year != -1){
-            s << "\t<Time Day=\"" << e.getRealeseDate().tm_mday <<"\" Month=\""<< e.getRealeseDate().tm_mon<<"\" Year=\""<< e.getRealeseDate().tm_year <<"\"/>"<<endl;
+            s << "\t\t<Time Day=\"" << e.getRealeseDate().tm_mday <<"\" Month=\""<< e.getRealeseDate().tm_mon<<"\" Year=\""<< e.getRealeseDate().tm_year <<"\"/>"<<endl;
         }
         
-        s << "\t<Status>" << e.getStatus() << "</Status>" << endl;
+        s << "\t\t<Status>" << e.getStatus() << "</Status>" << endl;
         
         if(e.getVoteCount() != 0 ){
-            s << "\t<Vote Count=\"" << e.getVoteCount() << "\">" << e.getVoteAverage() << "</Vote>" << endl;
+            s << "\t\t<Vote Count=\"" << e.getVoteCount() << "\">" << e.getVoteAverage() << "</Vote>" << endl;
         }
         else{
-            s << "\t<Vote Count=\"\"></Vote>" << endl;
+            s << "\t\t<Vote Count=\"\"></Vote>" << endl;
         }
         
-        s << "\t<RunTime>" << e.getRunTime() << "</RunTime>" << endl;
+        if(e.getRunTime() > 0){
+            s << "\t\t<RunTime>" << e.getRunTime() << "</RunTime>" << endl;
+        }
+        else{
+            s << "\t\t<RunTime></RunTime>" << endl;
+        }
         
-        s << "\t<Certification>" << e.getCertification() << "</Certification>" << endl;
+        s << "\t\t<Certification>" << e.getCertification() << "</Certification>" << endl;
         
         if(e.getBudget()>0.1){
-            s << "\t<Budget>" << e.getBudget() << "</Budget>" << endl;
+            s << "\t\t<Budget>" << e.getBudget() << "</Budget>" << endl;
         }
         else{
-            s << "\t<Budget></Budget>" << endl;
+            s << "\t\t<Budget></Budget>" << endl;
         }
 
-        s << "\t<Tag>" << e.getTag() << "</Tag>" << endl;
+        s << "\t\t<Tag>" << e.getTag() << "</Tag>" << endl;
 
-        s << "\t<Genres>"<<endl;
+        s << "\t\t<Genres>"<<endl;
         for(int i = 0 ; i<e.getGenres().size() ; i++){
-            s <<"\t\t"<< e.getGenres()[i] << endl;
+            s <<"\t\t\t"<< e.getGenres()[i] << endl;
         }
-        s << "\t</Genres>"<<endl;
+        s << "\t\t</Genres>"<<endl;
 
-        s << "\t<Directors>"<<endl;
+        s << "\t\t<Directors>"<<endl;
         for(int i = 0 ; i<e.getDirectors().size() ; i++){
-            s <<"\t\t"<< e.getDirectors()[i] << endl;
+            s <<"\t\t\t"<< e.getDirectors()[i] << endl;
         }
-        s << "\t</Directors>"<<endl;
+        s << "\t\t</Directors>"<<endl;
 
-        s << "\t<Actors>"<<endl;
+        s << "\t\t<Actors>"<<endl;
         for(int i = 0 ; i<e.getActors().size() ; i++){
-            s <<"\t\t"<< e.getActors()[i] << endl;
+            s <<"\t\t\t"<< e.getActors()[i] << endl;
         }
-        s << "\t</Actors>"<<endl;
+        s << "\t\t</Actors>"<<endl;
 
-        s << "</Film>" << endl;
+        s << "\t</Film>" << endl;
         return s;
     }
 

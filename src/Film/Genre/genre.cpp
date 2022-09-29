@@ -22,15 +22,17 @@ Genre::Genre(string s){
         }
         else{
             try{ setId(stoi(tmp[0])); }
-            catch(exception &err){ throw "Error: id is not an int"; }
+            catch(exception &err){ throw "Genre.Error: id is not an int"; }
             setLabel("");
         }
     }
     if(count == 2){
         try{ setId(stoi(tmp[0])); }
-        catch(exception &err){ throw "Error: id is not an int"; }
+        catch(exception &err){ throw "Genre.Error: id is not an int"; }
 
         setLabel(tmp[1]);
+        UtilityLib::replace_all(label, "&", "&amp;");
+        UtilityLib::replace_all(label, "\"", "&#39;");
     } 
 }
 
@@ -80,14 +82,14 @@ vector<Genre> Genre::stoGs(string sgenre){
         for(int i = 0 ; i < tmp.size() ; i++){
             try{ genres.push_back( Genre(tmp[i])); }
             catch(const char * t){ throw t; }
-            catch(...){ throw "Error: Not Implemented Exception."; }       
+            catch(...){ throw "Genre.stoGs.Error: Not Implemented Exception."; }       
         }
     }
     else{
         if(sgenre.compare("") != 0){ 
             try{ genres.push_back( Genre(sgenre) ); }
             catch(const char * t){ throw t; }
-            catch(...){ throw "Error: Not Implemented Exception."; }    
+            catch(...){ throw "Genre.stoGs.Error: Not Implemented Exception."; }    
         }
     }
 
