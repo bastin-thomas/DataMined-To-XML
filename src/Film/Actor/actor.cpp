@@ -38,8 +38,6 @@ Actor::Actor(string s){
         catch(exception &err){ throw "Actor.Error: id is not an int"; }
 
         setActName(tmp[1]);
-        UtilityLib::replace_all(actname, "&", "&amp;");
-        UtilityLib::replace_all(actname, "\"", "&#39;");
         setCharName("");
         return;
     }
@@ -48,11 +46,7 @@ Actor::Actor(string s){
         catch(exception &err){ throw "Actor.Error: id is not an int"; }
 
         setActName(tmp[1]);
-        UtilityLib::replace_all(actname, "&", "&amp;");
-        UtilityLib::replace_all(actname, "\"", "&#39;");
         setCharName(tmp[2]);
-        UtilityLib::replace_all(charname, "&", "&amp;");
-        UtilityLib::replace_all(charname, "\"", "&#39;");
         return;
     }
 }

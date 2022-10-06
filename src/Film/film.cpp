@@ -7,8 +7,13 @@
 
     //Constructeur d'init    
     Film::Film(string line){
-        vector<string> tokenizedString = UtilityLib::getTokens(line, L"‣");
+        
+        //Replace all Invalide CharType
+        UtilityLib::replace_all(line, "&", "&amp;");
+        UtilityLib::replace_all(line, "<", "&lt;");
+        UtilityLib::replace_all(line, "\"", "&#39;");
 
+        vector<string> tokenizedString = UtilityLib::getTokens(line, L"‣");
         int t = tokenizedString.size();
 
         try{ id = stoi(tokenizedString[0]); }
@@ -16,15 +21,9 @@
 
         
         title = tokenizedString[1];
-        UtilityLib::replace_all(title, "&", "&amp;");
-
         originalTitle = tokenizedString[2];
-        UtilityLib::replace_all(originalTitle, "&", "&amp;");
-
         releaseDate = UtilityLib::stodate(tokenizedString[3]);
         status = tokenizedString[4];
-        UtilityLib::replace_all(status, "&", "&amp;");
-
         
 
         try{ voteAverage = stod(tokenizedString[5]); } 
@@ -38,17 +37,13 @@
             this->runTime = -1;
         }
 
-
-        certification = tokenizedString[8];
-        UtilityLib::replace_all(certification, "&", "&amp;");
-        
+        certification = tokenizedString[8];        
         posterPath = tokenizedString[9];
 
         try{ budget = stod(tokenizedString[10]); } 
         catch(exception &err){ throw "FilmInit.budget not a Double."; }
 
         tag = tokenizedString[11];
-        UtilityLib::replace_all(tag, "&", "&amp;");
 
         if(tokenizedString[12].compare("") != 0){
             genres = Genre::stoGs(tokenizedString[12]);

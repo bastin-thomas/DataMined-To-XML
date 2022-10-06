@@ -31,8 +31,6 @@ Director::Director(string s){
         catch(exception &err){ throw "Director.Error: id is not an int"; }
 
         setLabel(tmp[1]);
-        UtilityLib::replace_all(label, "&", "&amp;");
-        UtilityLib::replace_all(label, "\"", "&#39;");
     }
 }
 
