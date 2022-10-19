@@ -129,13 +129,13 @@
         s << "\t\t<Certification>" << e.getCertification() << "</Certification>" << endl;
         
         if(e.getBudget()>0.1){
-            s << "\t\t<Budget>" << e.getBudget() << "</Budget>" << endl;
+            s << "\t\t<Budget>" << (int)e.getBudget() << "</Budget>" << endl;
         }
         else{
             s << "\t\t<Budget></Budget>" << endl;
         }
 
-        s << "\t\t<Tag>" << e.getTag() << "</Tag>" << endl;
+        s << std::defaultfloat << "\t\t<Tag>" << e.getTag() << "</Tag>" << endl;
 
         s << "\t\t<Genres>"<<endl;
         for(int i = 0 ; i<e.getGenres().size() ; i++){
