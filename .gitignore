@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/SAX_Validator/nbproject/private/
+/SAX_Validator/build/
+/SAX_Validator/dist/

@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<!DOCTYPE Films [
-<!ELEMENT Films (Film*)>
-	<!ELEMENT Film (Title, Time?, Status, Vote, RunTime, Certification, Budget, Tag, Genres, Directors, Actors)>
-		<!ATTLIST Film Id CDATA #REQUIRED>
-		<!ATTLIST Film PosterPath CDATA #REQUIRED>
-	<!ELEMENT Title (#PCDATA)>
-		<!ATTLIST Title OriginalTitle CDATA #REQUIRED>
-	<!ELEMENT Time EMPTY>
-		<!ATTLIST Time Day CDATA #REQUIRED>
-		<!ATTLIST Time Month CDATA #REQUIRED>
-		<!ATTLIST Time Year CDATA #REQUIRED>
-	<!ELEMENT Status (#PCDATA)>
-	<!ELEMENT Vote (#PCDATA)>
-		<!ATTLIST Vote Count CDATA #REQUIRED>
-	<!ELEMENT RunTime (#PCDATA)>
-	<!ELEMENT Certification (#PCDATA)>
-	<!ELEMENT Budget (#PCDATA)>
-	<!ELEMENT Tag (#PCDATA)>
-	<!ELEMENT Genres (Genre*)>
-		<!ELEMENT Genre EMPTY>
-			<!ATTLIST Genre Id CDATA #REQUIRED>
-			<!ATTLIST Genre Label CDATA #REQUIRED>
-	<!ELEMENT Directors (Director*)>
-		<!ELEMENT Director EMPTY>
-			<!ATTLIST Director Id CDATA #REQUIRED>
-			<!ATTLIST Director Name CDATA #REQUIRED>
-	<!ELEMENT Actors (Actor*)>
-		<!ELEMENT Actor EMPTY>
-			<!ATTLIST Actor Id CDATA #REQUIRED>
-			<!ATTLIST Actor ActName CDATA #REQUIRED>
-			<!ATTLIST Actor CharName CDATA #REQUIRED>
-]>
+<!DOCTYPE Films [<!ELEMENT Films (Film*)>
+<!ELEMENT Film (Title,Time?,Status,Vote,RunTime,Certification,Budget,Tag,Genres,Directors,Actors)>
+<!ATTLIST Film Id CDATA #REQUIRED>
+<!ATTLIST Film PosterPath CDATA #REQUIRED>
+<!ELEMENT Title (#PCDATA)>
+<!ATTLIST Title OriginalTitle CDATA #REQUIRED>
+<!ELEMENT Time EMPTY>
+<!ATTLIST Time Day CDATA #REQUIRED>
+<!ATTLIST Time Month CDATA #REQUIRED>
+<!ATTLIST Time Year CDATA #REQUIRED>
+<!ELEMENT Status (#PCDATA)>
+<!ELEMENT Vote (#PCDATA)>
+<!ATTLIST Vote Count CDATA #REQUIRED>
+<!ELEMENT RunTime (#PCDATA)>
+<!ELEMENT Certification (#PCDATA)>
+<!ELEMENT Budget (#PCDATA)>
+<!ELEMENT Tag (#PCDATA)>
+<!ELEMENT Genres (Genre*)>
+<!ELEMENT Genre EMPTY>
+<!ATTLIST Genre Id CDATA #REQUIRED>
+<!ATTLIST Genre Label CDATA #REQUIRED>
+<!ELEMENT Directors (Director*)>
+<!ELEMENT Director EMPTY>
+<!ATTLIST Director Id CDATA #REQUIRED>
+<!ATTLIST Director Name CDATA #REQUIRED>
+<!ELEMENT Actors (Actor*)>
+<!ELEMENT Actor EMPTY>
+<!ATTLIST Actor Id CDATA #REQUIRED>
+<!ATTLIST Actor ActName CDATA #REQUIRED>
+<!ATTLIST Actor CharName CDATA #REQUIRED>]>
+
+
+
+
+
 <Films>
 	<Film Id="2" PosterPath="/gZCJZOn4l0Zj5hAxsMbxoS6CL0u.jpg" >
 		<Title OriginalTitle="Ariel" >Ariel</Title>
