@@ -1,0 +1,86 @@
+.Vote{
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: space-evenly;
+	display: flex;
+}
+
+
+
+td:nth-child(odd) {
+	background: rgba(240, 127, 127, 0.288);
+}
+  
+td:nth-child(even) {
+	background: rgba(124, 247, 124, 0.288);
+}
+
+tr{
+	word-wrap: break-word;
+}
+
+td{
+	text-align: center;
+	max-height: 20px;
+}
+
+table.secondary{
+	text-align: center;
+	height: 100%;
+	width: 100%;
+}
+
+td:nth-child(11){
+	max-width: 200px;
+}
+
+td:nth-child(12){
+	max-width: 400px;
+}
+
+tbody{
+	height: 100%;
+	width: 100%;
+}
+
+
+.Tag{
+	height:60px; 
+	overflow:scroll ;
+	overflow-x: hidden;
+}
+
+.Genre{
+	height:60px;
+	overflow:scroll ;
+	overflow-x: hidden;
+}
+
+.Genre table tbody{
+	width: max-content;
+}
+
+.Genre table tbody tr td{
+	width: max-content;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555;
+  }

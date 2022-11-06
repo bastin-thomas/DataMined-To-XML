@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="./1000movies.xsl" type="text/xsl"?>
+
 <!DOCTYPE Films [<!ELEMENT Films (Film*)>
 <!ELEMENT Film (Title,Time?,Status,Vote,RunTime,Certification,Budget,Tag,Genres,Directors,Actors)>
 <!ATTLIST Film Id CDATA #REQUIRED>
