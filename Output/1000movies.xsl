@@ -22,11 +22,12 @@
 					<th>Genres</th>
 					<th>Directors</th>
 					<th>Actors</th>
+					<th>Path</th>
 				</tr>
 				<xsl:for-each select="Films/Film">
 					<tr>
 						<td><xsl:value-of select="@Id"/></td>
-						<td><xsl:value-of select="Title"/></td>
+						<td><xsl:value-of select="Title"/> / <xsl:value-of select="Title/@OriginalTitle"/></td>
 						<td><xsl:value-of select="Time/@Day"/>/<xsl:value-of select="Time/@Month"/>/<xsl:value-of select="Time/@Year"/></td>
 						<td><xsl:value-of select="Status"/></td>
 						<td><span class="Vote"><span>Vote: <xsl:value-of select="Vote/@Count"/></span> | <span><xsl:value-of select="Vote"/>⭐</span></span></td>
@@ -82,6 +83,7 @@
 							</div>
 						</td>
 
+						<td><xsl:value-of select="@PosterPath"/></td>
 					</tr>
 				</xsl:for-each>
 			</table>
